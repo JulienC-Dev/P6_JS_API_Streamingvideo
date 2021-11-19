@@ -1,0 +1,173 @@
+body
+{
+color: black;
+flex-direction: column;
+justify-content: center;
+margin: 0;
+
+}
+
+header
+{
+background-color: grey;
+display: flex;
+justify-content: space-around;
+height: 6em;
+align-items: center;
+color: white;
+}
+
+.Juststream
+{
+font-size: x-large
+}
+
+
+.pictureBestMovie{
+background-size: contain;
+/*
+width: 1834px;
+position: absolute;
+top: 14%;
+left: 0.5%;
+*/
+}
+
+#BestMovie{
+position: absolute;
+top: 270px;
+left: 40px;
+}
+
+
+#btn1{
+width: 130px;
+background: #800000;
+box-shadow: 0 0 2px black;
+border-radius: 10px;
+border-color: black;
+position: absolute;
+color:white;
+top: 49%;
+left: 10%;
+transform: translate(-50%, -50%);
+z-index: 9999;
+padding: 10px;
+text-align: center;
+
+}
+
+#popUpBox{
+height: 38em;
+overflow: hidden;
+background: black;
+box-shadow: 0 0 10px black;
+box-sizing: content-box;
+display: none;
+color:red;
+position: absolute;
+top: 14%;
+left: 3%;
+right: 3.5%;
+z-index: 9999;
+padding:0;
+}
+
+#PochetteFilm, #NomFilm, #Categorie, #sortieFilm, #score, #realisateur, #acteurs,
+#tempsFilm, #paysOrigine, #BoxOffice, #resume{
+
+color : white;
+box-shadow: 0 0 2px white;
+padding: 2em;
+height: 10em;
+width: 8em;
+
+}
+
+.movieInfo{
+display: flex;
+flex-wrap:wrap;
+padding: 2em;
+justify-content: space-between;
+
+}
+
+#clsbtn{
+width: 130px;
+position: absolute;
+top: 90%;
+left: 10%;
+background: #800000;
+box-shadow: 0 0 2px black;
+border-color: black;
+border-radius: 10px;
+transform: translate(-50%, -50%);
+z-index: 9999;
+padding: 10px;
+text-align: center;
+color: white;
+}
+
+.BestmovieBox
+{
+background-color:grey;
+height: 20em;
+border: 5px black solid;
+
+}
+
+
+.BestNotemovies, .categorie1, .categorie2, .categorie3
+{
+height: 15em;
+margin: -4px;
+border: 5px black solid;
+text-align: center;
+}
+
+#filmBestnote, #Categorie1, #Categorie2, #Categorie3{
+font-size : 22px;
+}
+
+#boxFilmMovies, #boxCatego1Movies, #boxCatego2Movies, #boxCatego3Movies{
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+
+.BoxFilm{
+border: 3px black solid;
+height: 10em;
+width: 7em;
+text-align: center;
+}
+
+.BtnD
+{
+background:white;
+width: 1;
+height: 1;
+border-top: 25px solid transparent;
+border-left: 50px solid ;
+border-bottom: 25px solid transparent;
+border-right: transparent;
+padding: 1.5px;
+}
+
+.BtnG
+{
+background:white;
+width: 1;
+height: 1;
+border-top: 25px solid transparent;
+border-right: 50px solid ;
+border-bottom: 25px solid transparent;
+
+padding: 1.5px;
+}
+
+
+span {
+  content: "\2190";
+}
