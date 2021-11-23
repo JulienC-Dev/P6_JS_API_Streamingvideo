@@ -1,4 +1,21 @@
 
+fetch("http://localhost:8000/api/v1/titles/")
+.then(result => result.json())
+.then(function(result){
+    x = result.results[1]['image_url'];
+    var p = document.getElementById("pictureBestMovie");
+    p.setAttribute("src", x);
+})
+
+//?imdb_score_min=9.6 - score
+
+//function nextpage(result){
+//    res = result['next'];
+//    for (var i = 0; i < results.length; i++){
+//    }
+//}
+
+
 
 function showbtn(){
     let popUpBox = document.getElementById("popUpBox");
@@ -10,13 +27,6 @@ function closes(){
     document.getElementById('popUpBox').style.display = "none";
 }
 
-//# import requests
-//# import json
-//#
-//# reponse_api = requests.get("http://localhost:8000/api/v1/titles/")
-//# print(reponse_api.status_code)
-//# data = reponse_api.text
-//# print(data)
-//# parse_json = json.loads(data)
-//#
+
+
 

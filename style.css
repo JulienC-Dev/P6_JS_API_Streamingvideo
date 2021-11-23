@@ -23,8 +23,12 @@ font-size: x-large
 }
 
 
-.pictureBestMovie{
+#pictureBestMovie{
 background-size: contain;
+display: block;
+margin-left: auto;
+margin-right: auto;
+padding-top: 1.5em;
 /*
 width: 1834px;
 position: absolute;
@@ -110,7 +114,7 @@ color: white;
 
 .BestmovieBox
 {
-background-color:grey;
+background-color:white;
 height: 20em;
 border: 5px black solid;
 
