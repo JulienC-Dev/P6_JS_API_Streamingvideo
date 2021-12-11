@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="style.css" />
         <title>JustStreamIt</title>
         <script src ="app.js" defer></script>
+
     </head>
 
     <body>
@@ -23,23 +24,9 @@
     <div class="BestmovieBox">
         <img id="pictureBestMovie" src="img_vide.jpg"
             alt="Picture Best movie">
-            <h1 id="BestMovie">Meilleur Film</h1>
-            <div class="btn"><button onclick="showbtn()" id="btn1"> Play</button></div>
-                <div id="popUpBox">
-                    <div class="movieInfo">
-                        <div id ="PochetteFilm"><img src='img_vide.jpg' alt=''>Pochette Film</div>
-                        <div id="NomFilm">Nom Film</div>
-                        <div id="Categorie">Catégorie</div>
-                        <div id="sortieFilm">Sortie Film</div>
-                        <div id="score">Score</div>
-                        <div id="realisateur">Réalisateur</div>
-                        <div id="acteurs">Acteurs</div>
-                        <div id="tempsFilm"> Durée Film</div>
-                        <div id="paysOrigine"> Pays d'origine</div>
-                        <div id="BoxOffice"> Résultat box office</div>
-                        <div id="resume"> Résumé Film</div>
-                        </div>
-                <div id="closeModal"><button onclick="closes()" id="clsbtn"> fermer</button></div>
+            <h1 id="BestMovie"></h1>
+            <div class="btn">
+                <button id="btn1"> Play</button>
             </div>
     </div>
 
@@ -47,13 +34,10 @@
         <h1 id="filmBestnote">Films les mieux notés</h1>
         <div id="boxFilmMovies">
             <a href=""><button class="BtnG" onclick=""></button></a>
-            <div class="BoxFilm">Film1</div>
-            <div class="BoxFilm">Film2</div>
-            <div class="BoxFilm">Film3</div>
-            <div class="BoxFilm">Film4</div>
-            <div class="BoxFilm">Film5</div>
-            <div class="BoxFilm">Film6</div>
-            <div class="BoxFilm">Film7</div>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film1'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film2'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film3'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film4'>
             <button class="BtnD" onclick=""></button>
         </div>
     </div>
@@ -61,47 +45,60 @@
     <div class="categorie1">
         <h1 id="Categorie1">Catégorie 1</h1>
         <div id ="boxCatego1Movies">
-            <button class="BtnG" onclick=""></button>
-            <div class="BoxFilm">Film1</div>
-            <div class="BoxFilm">Film2</div>
-            <div class="BoxFilm">Film3</div>
-            <div class="BoxFilm">Film4</div>
-            <div class="BoxFilm">Film5</div>
-            <div class="BoxFilm">Film6</div>
-            <div class="BoxFilm">Film7</div>
+            <a href=""><button class="BtnG" onclick=""></button></a>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film1'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film2'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film3'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film4'>
+
             <button class="BtnD" onclick=""></button>
         </div>
     </div>
+
 
 
     <div class="categorie2">
         <h1 id="Categorie2">Catégorie 2</h1>
         <div id ="boxCatego2Movies">
-            <button class="BtnG" onclick=""></button>
-            <div class="BoxFilm">Film1</div>
-            <div class="BoxFilm">Film2</div>
-            <div class="BoxFilm">Film3</div>
-            <div class="BoxFilm">Film4</div>
-            <div class="BoxFilm">Film5</div>
-            <div class="BoxFilm">Film6</div>
-            <div class="BoxFilm">Film7</div>
+            <a href=""><button class="BtnG" onclick=""></button></a>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film1'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film2'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film3'>
+            <img class="BoxFilm" src='img_vide.jpg' alt='Film4'>
             <button class="BtnD" onclick=""></button>
         </div>
     </div>
-            
+
+
     <div class="categorie3">
         <h1 id="Categorie3">Catégorie 3</h1>
-        <div id ="boxCatego3Movies">
-            <button class="BtnG" onclick=""></button>
-            <div class="BoxFilm">Film1</div>
-            <div class="BoxFilm">Film2</div>
-            <div class="BoxFilm">Film3</div>
-            <div class="BoxFilm">Film4</div>
-            <div class="BoxFilm">Film5</div>
-            <div class="BoxFilm">Film6</div>
-            <div class="BoxFilm">Film7</div>
-            <button class="BtnD" onclick=""></button>
-        </div>
+            <div id ="boxCatego3Movies">
+                <button class="BtnG"></button>
+                    <div class="BoxFilmtest"><img id="" src='img_vide.jpg' alt='Film1'></div>
+                    <div class="BoxFilmtest"><img id="" src='img_vide.jpg' alt='Film2'></div>
+                    <div class="BoxFilmtest"><img id="" src='img_vide.jpg' alt='Film3'></div>
+                    <div class="BoxFilmtest"><img id="" src='img_vide.jpg' alt='Film4'></div>
+                <button class="BtnD"></button>
+            </div>
+
+    </div>
+
+    <div class="popUpBox">
+        <img id ="PochetteFilm" src='img_vide.jpg' alt='Pochette Film'>
+        <ul class="movieInfo">
+            <li id="NomFilm">Nom du Film : </li>
+            <li id="Categorie">Catégorie : </li>
+            <li id="sortieFilm">Sortie Film : </li>
+            <li id="score">Score : </li>
+            <li id="realisateur">Réalisateur : </li>
+            <li id="acteurs">Acteurs : </li>
+            <li id="tempsFilm"> Durée du Film en minutes : </li>
+            <li id="paysOrigine"> Pays d'origine : </li>
+            <li id="BoxOffice"> Résultat box office : </li>
+            <li id="resume"> Résumé Film : </li>
+        </ul>
+        <div id="closeModal"><button id="clsbtn"> fermer</button></div>
+
     </div>
 
     </body>
