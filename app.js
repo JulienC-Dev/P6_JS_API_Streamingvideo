@@ -1,21 +1,34 @@
 
 !(function(d){
-var Cate3 = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score"
-RequestData(Cate3);
 
-//var Cate2 = "http://localhost:8000/api/v1/titles/?genre=Biography&sort_by=-imdb_score"
-//RequestData(Cate2);
-
+var bestmovie = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
+var bestmoviebox = document.getElementById("boxBestFilm");
+RequestData(bestmovie, bestmoviebox);
 
 
-var FilmsData = []
+var catemieuxNote = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
+var catebestmoviebox = document.getElementById("boxFilmMovies");
+RequestData(catemieuxNote, catebestmoviebox);
 
-function RequestData(url){
+var Cate1 = "http://localhost:8000/api/v1/titles/?genre=Sci-Fi&sort_by=-imdb_score";
+var cate1box = document.getElementById("boxCatego1Movies");
+RequestData(Cate1, cate1box);
+
+var Cate2 = "http://localhost:8000/api/v1/titles/?genre=Animation&sort_by=-imdb_score";
+var cate2box = document.getElementById("boxCatego2Movies");
+RequestData(Cate2, cate2box);
+
+var Cate3 = "http://localhost:8000/api/v1/titles/?genre=Biography&sort_by=-imdb_score";
+var cate3box = document.getElementById("boxCatego3Movies");
+RequestData(Cate3, cate3box);
+
+
+function RequestData(url,box){
 result = fetch(url)
 
 .then(result => result.json())
 .then(function(result){
-
+var FilmsData = []
     for (var i = 0; i < result.results.length; i++){
         FilmsData.push(result.results[i])
 }
@@ -32,12 +45,11 @@ for (var i = 0; i < nextpage.results.length; i++){
 }
 
 
-var itemClassName = document.getElementById("boxCatego3Movies").getElementsByTagName('img');
 
-totalItems = itemClassName.length;
-
-BoxFilmtest_initial = 0,
-moving = true;
+//var itemClassName = document.getElementById("boxCatego3Movies").getElementsByTagName('img');
+//totalItems = itemClassName.length;
+//BoxFilmtest_initial = 0,
+//moving = true;
 
 
 setEventListeners();
@@ -46,8 +58,12 @@ function setEventListeners() {
     var next = d.getElementsByClassName('BtnD')[0];
     var prev = d.getElementsByClassName('BtnG')[0];
     next.addEventListener('click', moveNext);
-//prev.addEventListener('click', movePrev);
+    //prev.addEventListener('click', movePrev);
+
 }
+
+
+
 
 function moveNext(){
 console.log('gauche');
@@ -64,22 +80,31 @@ function DataFilm(result){
 function imageMovie(result, i){
     x = result['image_url'];
     id = result['id'];
-
-    var imgMovi = document.getElementById("boxCatego3Movies").getElementsByTagName('img');
+    imgMovi = box.getElementsByTagName('img');
     imgMovi[i].setAttribute("src",x);
     imgMovi[i].setAttribute("id",id);
     imgMovi[i].addEventListener('click',popUpPicture);
+    console.log(imgMovi[i]);
+//    if (id==1508669){
+//    btn = document.getElementById("btn1");
+////    imgMovi[i] = btn;
+//    btn.onclick() = function(){
+//    console.log(imgMovi[i])}
+//    }
+
 
 
 function popUpPicture(){
-    var blockCate = document.getElementsByClassName("categorie3");
-    var firstelem = document.getElementById("Categorie3");
+    boxCategorie = box.parentNode;
+    console.log(box);
+    titleBox = boxCategorie.getElementsByTagName('h1');
     var popUpBox = document.getElementsByClassName("popUpBox");
-    blockCate[0].insertBefore(popUpBox[0], firstelem);
+    boxCategorie.insertBefore(popUpBox[0], titleBox[0]);
     popUpBox[0].style.display = "flex";
+
     clearBox();
     nomFilm(result);
-    PochetteFilm(imgMovi[i]);
+    PochetteFilm(result);
     categorie(result);
     sortieFilm(result);
     score(result);
@@ -111,7 +136,7 @@ function clearBox(){
     var acteurs = document.getElementById("acteurs");
     acteurs.innerHTML = "Acteurs : ";
     var resfilm = document.getElementById("tempsFilm");
-    resfilm.innerHTML = "Durée du Film en minutes :";
+    resfilm.innerHTML = "Durée du Film en minutes : ";
     var paysfilm = document.getElementById("paysOrigine");
     paysfilm.innerHTML = "Pays d'origine : ";
     var boxOffice = document.getElementById("BoxOffice");
@@ -122,7 +147,7 @@ function clearBox(){
 }
 
 function PochetteFilm(result){
-    pochetteFilm = result['src'];
+    pochetteFilm = result['image_url'];
     var picture = document.getElementById("PochetteFilm");
     picture.setAttribute("src",pochetteFilm);
 }
@@ -156,6 +181,8 @@ function acteurs(result){
     var acteurs = document.getElementById("acteurs");
     acteurs.innerHTML += actors;
 }
+
+
 
 function tempsFilm(result){
     urlImdb = result['url'];
@@ -216,9 +243,6 @@ pop[0].style.display = "none";
 }
 }(document));
 
-//var imgMovie = document.getElementById("boxCatego3Movies").getElementsByTagName('img');
-//imgMovie[i].setAttribute("src",x);
-//imgMovie[i].setAttribute("id", "(cela va être une var, la var va permettre de cliquer sur le film et ouvrir dynamiquement le modal et les infos");
 
 /////affiche 4 - retour liste /
 /////à un moment bloquer à droite et bloquer à gauche/
@@ -231,11 +255,51 @@ pop[0].style.display = "none";
 //document.getElementById('btn').style.display = "none";
 //
 //}
-//
-//function closes(){
-//document.getElementById('popUpBox').style.display = "none";
+
+
+//function play(){
+//    btn = document.getElementById("btn1");
+//    btn.addEventListener('click', test);
 //}
+//    btn.onclick() = function(){
+//    console.log("bgfhgdf")}
+
+
+//   function test(){
+//console.log("vgdfgvd")
+//bmovie = document.getElementById("1508669");
+//console.log(bmovie);
+////bmovie.addEventListener('click', popUpPicture);
+////}
+
+
+//    box.parentNode = "BestmovieBox";
+//    imgMovi[i] = btn;
+//    console.log(box.parentNode);
+//    btn.addEventListener('click',popUpPicture);
+
+//    imgMovi[i].addEventListener('click',popUpPicture);
 
 
 
+//    if (id==1508669){
+//    btn = document.getElementById("btn1");
+//    imgMovi[i] = btn;
+//    console.log(imgMovi[i]);
+//    console.log(btn);
+//    console.log(result);
+//    boxCategorie = box.parentNode;
+//    console.log(boxCategorie);
+//    var target = document.getElementsByClassName("BestmovieBox");
+//    console.log(target[0]);
+//    btn.addEventListener('click',popUpPicture);
+//    }
+//
+//function test(){
+//console.log(target);
+//console.log("jbfdbj");
+//console.log(box.parentNode);
+//console.log(box.parentNode = "BestmovieBox");
+//console.log(box.parentNode):
+//}
 

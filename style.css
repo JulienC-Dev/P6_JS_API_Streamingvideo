@@ -23,60 +23,27 @@ font-size: x-large
 }
 
 
-#pictureBestMovie{
-background-size: contain;
-display: block;
-margin-left: auto;
-margin-right: auto;
-padding-top: 2em;
-
-}
-
-#BestMovie{
-position: absolute;
-top: 270px;
-left: 40px;
-}
-
-
-/*#btn1{
+#btn1{
 width: 130px;
 background: #800000;
 box-shadow: 0 0 2px black;
 border-radius: 10px;
 border-color: black;
-position: absolute;
 color:white;
-top: 49%;
-left: 10%;
 transform: translate(-50%, -50%);
 z-index: 9999;
 padding: 10px;
 text-align: center;
+position:relative;
+left:15em;
+}
 
-}*/
-
-/*#popUpBox{
-height: 38em;
-overflow: hidden;
-background: black;
-box-shadow: 0 0 10px black;
-box-sizing: content-box;
-display: none;
-color:white;
-position: absolute;
-top: 14%;
-left: 3%;
-right: 3.5%;
-z-index: 9999;
-padding:0;
-}*/
 
 
 .popUpBox{
-height: 35em;
 background: black;
 display:none;
+box-sizing: content-box;
 }
 
 #PochetteFilm{
@@ -121,11 +88,10 @@ color: white;
 }
 
 
-
 .BestmovieBox
 {
 background-color:white;
-height: 20em;
+height: auto;
 border: 5px black solid;
 border-bottom : hidden;
 }
@@ -133,11 +99,11 @@ border-bottom : hidden;
 
 .BestNotemovies, .categorie1, .categorie2, .categorie3
 {
-height: 15em;
+height: auto;
 margin: -4px;
 border: 5px black solid;
 text-align: center;
-z-index: 9999;
+padding-bottom : 1em;
 
 }
 
@@ -145,25 +111,18 @@ z-index: 9999;
 font-size : 22px;
 }
 
-#boxFilmMovies, #boxCatego1Movies, #boxCatego2Movies, #boxCatego3Movies{
+#boxBestFilm, #boxFilmMovies, #boxCatego1Movies, #boxCatego2Movies, #boxCatego3Movies{
 display: flex;
 justify-content: space-around;
 align-items: center;
 }
 
 
+
 .BoxFilm{
 border: 3px black solid;
 height: 10em;
 width: 7em;
-text-align: center;
-}
-
-.BoxFilmtest{
-border: 3px black solid;
-height: 10em;
-width: 7em;
-overflow: hidden;
 }
 
 img{
@@ -195,12 +154,5 @@ border-bottom: 25px solid transparent;
 padding: 1.5px;
 }
 
-/*
-#afficheFilm{
-background-size: contain;
-display: block;
-margin-left: auto;
-margin-right: auto;
-}
-*/
+
 
