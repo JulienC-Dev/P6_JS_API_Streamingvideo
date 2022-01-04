@@ -17,7 +17,7 @@ L'application interagit avec une API Rest.
 
 
 1.2 - Connection à l'Api Rest
-- cloner le repository avec la l'interpréteur - git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git
+- cloner le repository avec l'interpréteur - git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git
 - puis se connecter à la racine via cd ocmovies-api-fr
 - Démarrer le serveur avec python manage.py runserver
 
