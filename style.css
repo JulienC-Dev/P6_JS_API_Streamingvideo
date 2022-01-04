@@ -42,8 +42,12 @@ left:15em;
 
 .popUpBox{
 background: black;
-display:none;
-box-sizing: content-box;
+width: 81em;
+position : fixed;
+top: 30px;
+left: 4.5em;
+display: none;
+z-index: 9999;
 }
 
 #PochetteFilm{
@@ -52,10 +56,11 @@ height: 13em;
 width: 10em;
 padding-top: 4.7em;
 padding-left: 6em;
+
 }
 
 
-#NomFilm, #Categorie, #sortieFilm, #score, #realisateur, #acteurs,
+#NomFilm, #Categorie, #sortieFilm, #rated, #scoreimbd, #realisateur, #acteurs,
 #tempsFilm, #paysOrigine, #BoxOffice, #resume{
 color : white;
 padding: 1em;
@@ -68,10 +73,10 @@ list-style:none;
 }
 
 #closeModal{
-position: relative;
-top: 500px;
+position: absolute;
+top: 450px;
 height: 3em;
-right: 70em;
+right: 60em;
 }
 
 #clsbtn{
@@ -87,11 +92,23 @@ text-align: center;
 color: white;
 }
 
+#BestMovie{
+position: absolute;
+top: 180px;
+left: 75px;
+}
+
+
+#resumeTitle{
+position: absolute;
+top: 300px;
+left: 40px;
+}
 
 .BestmovieBox
 {
 background-color:white;
-height: auto;
+height: 16em;
 border: 5px black solid;
 border-bottom : hidden;
 }
@@ -99,7 +116,7 @@ border-bottom : hidden;
 
 .BestNotemovies, .categorie1, .categorie2, .categorie3
 {
-height: auto;
+height: 16em;
 margin: -4px;
 border: 5px black solid;
 text-align: center;

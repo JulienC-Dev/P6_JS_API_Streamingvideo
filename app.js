@@ -1,10 +1,8 @@
-
 !(function(d){
 
 var bestmovie = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
 var bestmoviebox = document.getElementById("boxBestFilm");
 RequestData(bestmovie, bestmoviebox);
-
 
 var catemieuxNote = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
 var catebestmoviebox = document.getElementById("boxFilmMovies");
@@ -12,116 +10,171 @@ RequestData(catemieuxNote, catebestmoviebox);
 
 var Cate1 = "http://localhost:8000/api/v1/titles/?genre=Sci-Fi&sort_by=-imdb_score";
 var cate1box = document.getElementById("boxCatego1Movies");
+cateSciFi = document.getElementById("Categorie1");
+cateSciFi.innerHTML += ": Sci-Fi";
 RequestData(Cate1, cate1box);
 
 var Cate2 = "http://localhost:8000/api/v1/titles/?genre=Animation&sort_by=-imdb_score";
 var cate2box = document.getElementById("boxCatego2Movies");
+cateAnimation = document.getElementById("Categorie2");
+cateAnimation.innerHTML += ": Animation";
 RequestData(Cate2, cate2box);
 
 var Cate3 = "http://localhost:8000/api/v1/titles/?genre=Biography&sort_by=-imdb_score";
 var cate3box = document.getElementById("boxCatego3Movies");
+cateBiography = document.getElementById("Categorie3");
+cateBiography.innerHTML += ": Biography";
 RequestData(Cate3, cate3box);
 
 
 function RequestData(url,box){
-result = fetch(url)
+requestMovies = fetch(url)
 
-.then(result => result.json())
-.then(function(result){
-var FilmsData = []
-    for (var i = 0; i < result.results.length; i++){
-        FilmsData.push(result.results[i])
+.then(requestMovies => requestMovies.json())
+.then(requestMovies => {
+
+
+var ObjectFilmsData = [];
+
+
+for (var i = 0; i < requestMovies.results.length; i++){
+    ObjectFilmsData.push(requestMovies.results[i])
 }
 
-if (result['next'] != null){
-    nextpage = result['next'];
-    nextpage = fetch(nextpage)
-.then(nextpage =>nextpage.json())
-.then(function(nextpage){
-for (var i = 0; i < nextpage.results.length; i++){
-    if (FilmsData.length<7){
-        FilmsData.push(nextpage.results[i])
-}else break
+if (requestMovies['next'] != null){
+    RequestNextPage = requestMovies['next'];
+    RequestNextPage = fetch(RequestNextPage)
+    .then(RequestNextPage =>RequestNextPage.json())
+    .then(RequestNextPage => {
+        for (var i = 0; i < RequestNextPage.results.length; i++){
+            if (ObjectFilmsData.length<7){
+                ObjectFilmsData.push(RequestNextPage.results[i])
+            }
+            }
+        return ObjectFilmsData;
+        })
+    }
+return RequestNextPage
+
+})
+requestMovies.then(ObjectFilmsData => {
+
+ExtractMovie(ObjectFilmsData)
+
+function ExtractMovie(ObjectFilmsData){
+
+    boxImgs = box.getElementsByTagName('img');
+    BestmovieBox = document.getElementById("boxBestFilm");
+    if (box == BestmovieBox){
+    btn = document.getElementById("btn1");
+    var titre = document.getElementById("BestMovie");
+    var resumeTitle = document.getElementById("resumeTitle");
+    FilmData = ObjectFilmsData[0];
+    boxImg = boxImgs[0];
+    fetch(FilmData.url)
+    .then(response => response.json())
+    .then(data => {
+        nomfilm = data['title'];
+        titre.innerHTML += nomfilm;
+        resumeFilm = data['description'];
+        resumeTitle.innerHTML += resumeFilm;
+        setUpImage(FilmData,boxImg)
+        btn.addEventListener('click', function(){
+        popUpPicture(data, boxImg)
+        })
+        }
+     )
+     }
+    else{
+    for (var i = 0; i < ObjectFilmsData.length; i++){
+        setUpImage(ObjectFilmsData[i], boxImgs[i]);
+    }
+    setEventListeners(ObjectFilmsData, boxImgs);
+    }
 }
 
 
+function setEventListeners(ObjectFilmsData, boxImgs) {
+    var next = box.getElementsByClassName('BtnD')[0];
+    var prev = box.getElementsByClassName('BtnG')[0];
 
-//var itemClassName = document.getElementById("boxCatego3Movies").getElementsByTagName('img');
-//totalItems = itemClassName.length;
-//BoxFilmtest_initial = 0,
-//moving = true;
+    next.addEventListener('click', function(){
+    moveNext(ObjectFilmsData, boxImgs);
+    });
+    prev.addEventListener('click', function(){
+    movePrev(ObjectFilmsData, boxImgs);
+    });
+}
 
-
-setEventListeners();
-
-function setEventListeners() {
-    var next = d.getElementsByClassName('BtnD')[0];
-    var prev = d.getElementsByClassName('BtnG')[0];
-    next.addEventListener('click', moveNext);
-    //prev.addEventListener('click', movePrev);
-
+function moveNext(ObjectFilmsData, boxImgs){
+    var ObjetfilmsGauche = [];
+    ObjetfilmsGauche = ObjectFilmsData.slice(3,7);
+    for (var i = 0; i < ObjetfilmsGauche.length; i++){
+        setUpImage(ObjetfilmsGauche[i], boxImgs[i]);
+    }
 }
 
 
+function movePrev(ObjectFilmsData, boxImgs){
+    var ObjetfilmsDroite = [];
+    ObjetfilmsDroite = ObjectFilmsData.slice(0,4);
 
-
-function moveNext(){
-console.log('gauche');
+    for (var i = 0; i < ObjetfilmsDroite.length; i++){
+        setUpImage(ObjetfilmsDroite[i], boxImgs[i]);
+    }
 }
 
 
-DataFilm(FilmsData)
-function DataFilm(result){
-    for (var i = 0; i < result.length; i++){
-    imageMovie(result[i], [i]);
+function setUpImage(filmData, boxImg){
+    imageMovie = filmData['image_url'];
+    idMovie = filmData['id'];
+
+    if (boxImg != null){
+    boxImg.setAttribute("src",imageMovie);
+    boxImg.setAttribute("id",idMovie);
+    boxImg.addEventListener('click', function(){
+    fetch(filmData.url)
+    .then(response => response.json())
+    .then(data => popUpPicture(data, boxImg))
+    });
+    }
 }
-}
-
-function imageMovie(result, i){
-    x = result['image_url'];
-    id = result['id'];
-    imgMovi = box.getElementsByTagName('img');
-    imgMovi[i].setAttribute("src",x);
-    imgMovi[i].setAttribute("id",id);
-    imgMovi[i].addEventListener('click',popUpPicture);
-    console.log(imgMovi[i]);
-//    if (id==1508669){
-//    btn = document.getElementById("btn1");
-////    imgMovi[i] = btn;
-//    btn.onclick() = function(){
-//    console.log(imgMovi[i])}
-//    }
 
 
-
-function popUpPicture(){
+function popUpPicture(filmData, boxImg){
     boxCategorie = box.parentNode;
-    console.log(box);
+    if (filmData.id ==boxImg.id){
     titleBox = boxCategorie.getElementsByTagName('h1');
     var popUpBox = document.getElementsByClassName("popUpBox");
     boxCategorie.insertBefore(popUpBox[0], titleBox[0]);
     popUpBox[0].style.display = "flex";
-
-    clearBox();
-    nomFilm(result);
-    PochetteFilm(result);
-    categorie(result);
-    sortieFilm(result);
-    score(result);
-    realisateur(result);
-    acteurs(result);
-    tempsFilm(result);
-    paysOrigine(result);
-    BoxOffice(result);
-    resume(result);
-    closeBtn = document.getElementById("clsbtn");
-    closeBtn.addEventListener('click',closes);
+    boxBestFilm = document.getElementById("boxBestFilm");
+    var btnPlay = document.getElementById("btn1");
+    btnPlay.style.display ="none";
+    if (box == boxBestFilm){
+    btnPlay.style.display ="none";
     }
 
-function nomFilm(result){
-    titre = result['title'];
-    var nomfilm = document.getElementById("NomFilm");
-    nomfilm.innerHTML += titre;
+    clearBox();
+    nomFilm(filmData);
+    PochetteFilm(filmData);
+    categorie(filmData);
+    sortieFilm(filmData);
+    ratedFilm(filmData);
+    scoreimdb(filmData);
+    realisateur(filmData);
+    acteurs(filmData);
+    tempsFilm(filmData);
+    paysOrigine(filmData);
+    BoxOffice(filmData);
+    resumeDescription(filmData);
+
+    closeBtn = document.getElementById("clsbtn");
+    closeBtn.addEventListener('click',closes);
+
+    }
+    else {
+    }
 }
 
 function clearBox(){
@@ -131,12 +184,16 @@ function clearBox(){
     categorie.innerHTML = "Catégorie : ";
     var sortieFilm = document.getElementById("sortieFilm");
     sortieFilm.innerHTML = "Sortie Film : ";
-    var score = document.getElementById("score");
-    score.innerHTML = "Score : ";
+    var rated = document.getElementById("rated");
+    rated.innerHTML = "Rated : ";
+    var scoreimbd = document.getElementById("scoreimbd");
+    scoreimbd.innerHTML = "Score imbd : ";
+    var realisateur = document.getElementById("realisateur");
+    realisateur.innerHTML = "Réalisateur : ";
     var acteurs = document.getElementById("acteurs");
     acteurs.innerHTML = "Acteurs : ";
-    var resfilm = document.getElementById("tempsFilm");
-    resfilm.innerHTML = "Durée du Film en minutes : ";
+    var tempsfilm = document.getElementById("tempsFilm");
+    tempsfilm.innerHTML = "Durée du Film en minutes : ";
     var paysfilm = document.getElementById("paysOrigine");
     paysfilm.innerHTML = "Pays d'origine : ";
     var boxOffice = document.getElementById("BoxOffice");
@@ -146,160 +203,84 @@ function clearBox(){
 
 }
 
-function PochetteFilm(result){
-    pochetteFilm = result['image_url'];
+function PochetteFilm(filmData){
+    pochetteFilm = filmData['image_url'];
     var picture = document.getElementById("PochetteFilm");
     picture.setAttribute("src",pochetteFilm);
 }
 
-function categorie(result){
-    genres= result['genres'];
+function nomFilm(filmData){
+    titre = filmData['title'];
+    var nomfilm = document.getElementById("NomFilm");
+    nomfilm.innerHTML += titre;
+}
+
+function categorie(filmData){
+    genres= filmData['genres'];
     var categorie = document.getElementById("Categorie");
     categorie.innerHTML += genres;
 }
 
-function sortieFilm(result){
-    year = result['year'];
+function sortieFilm(filmData){
+    year = filmData['year'];
     var sortieFilm = document.getElementById("sortieFilm");
     sortieFilm.innerHTML += year;
 }
 
-function score(result){
-    imdbSocre = result['imdb_score'];
-    var score = document.getElementById("score");
+function ratedFilm(filmData){
+    rated = filmData['rated'];
+    var ratedd = document.getElementById("rated");
+    ratedd.innerHTML += rated;
+}
+
+function scoreimdb(filmData){
+    imdbSocre = filmData['imdb_score'];
+    var score = document.getElementById("scoreimbd");
     score.innerHTML += imdbSocre;
 }
 
-function realisateur(result){
-    directors = result['directors'];
+function realisateur(filmData){
+    directors = filmData['directors'];
     var realisateur = document.getElementById("realisateur");
     realisateur.innerHTML += directors;
 }
 
-function acteurs(result){
-    actors = result['actors'];
+function acteurs(filmData){
+    actors = filmData['actors'];
     var acteurs = document.getElementById("acteurs");
     acteurs.innerHTML += actors;
 }
 
-
-
-function tempsFilm(result){
-    urlImdb = result['url'];
-    res = fetch(urlImdb)
-    .then(res => res.json())
-    .then(res = function(res){
-    duree = res['duration'];
-    var resfilm = document.getElementById("tempsFilm");
-    resfilm.innerHTML += duree;
-
-})
+function tempsFilm(filmData){
+    dureFilm = filmData['duration'];
+    tempsfilm = document.getElementById("tempsFilm");
+    tempsfilm.innerHTML += dureFilm;
 }
 
-function paysOrigine(result){
-    urlImdb = result['url'];
-    res = fetch(urlImdb)
-    .then(res => res.json())
-    .then(res = function(res){
-        countries = res['countries'];
-        var paysfilm = document.getElementById("paysOrigine");
-        paysfilm.innerHTML += countries;
-})
+function paysOrigine(filmData){
+    countries = filmData['countries'];
+    var paysfilm = document.getElementById("paysOrigine");
+    paysfilm.innerHTML += countries;
 }
 
-function BoxOffice(result){
-    urlImdb = result['url'];
-    res = fetch(urlImdb)
-    .then(res => res.json())
-    .then(res = function(res){
-        reviewcritics = res['reviews_from_critics'];
-        var boxOffice = document.getElementById("BoxOffice");
-        boxOffice.innerHTML += reviewcritics;
-})
+function BoxOffice(filmData){
+    reviewcritics = filmData['worldwide_gross_income'];
+    var boxOffice = document.getElementById("BoxOffice");
+    boxOffice.innerHTML += reviewcritics;
 }
 
-function resume(result){
-urlImdb = result['url'];
-res = fetch(urlImdb)
-.then(res => res.json())
-.then(res = function(res){
-    resumedescription = res['long_description'];
+function resumeDescription(filmData){
+    resumedescription = filmData['long_description'];
     var resumeFilm = document.getElementById("resume");
     resumeFilm.innerHTML += resumedescription;
-})
 }
 
 function closes(){
 pop = document.getElementsByClassName('popUpBox');
 pop[0].style.display = "none";
+var btnPlay = document.getElementById("btn1");
+btnPlay.style.display ="block";
 }
-
-}
-}
-)
-}
-}
-)
+})
 }
 }(document));
-
-
-/////affiche 4 - retour liste /
-/////à un moment bloquer à droite et bloquer à gauche/
-
-
-//function showbtn(){
-//let popUpBox = document.getElementById("popUpBox");
-//popUpBox.style.display = "block";
-//popUpBox.style.display = "flex" ;
-//document.getElementById('btn').style.display = "none";
-//
-//}
-
-
-//function play(){
-//    btn = document.getElementById("btn1");
-//    btn.addEventListener('click', test);
-//}
-//    btn.onclick() = function(){
-//    console.log("bgfhgdf")}
-
-
-//   function test(){
-//console.log("vgdfgvd")
-//bmovie = document.getElementById("1508669");
-//console.log(bmovie);
-////bmovie.addEventListener('click', popUpPicture);
-////}
-
-
-//    box.parentNode = "BestmovieBox";
-//    imgMovi[i] = btn;
-//    console.log(box.parentNode);
-//    btn.addEventListener('click',popUpPicture);
-
-//    imgMovi[i].addEventListener('click',popUpPicture);
-
-
-
-//    if (id==1508669){
-//    btn = document.getElementById("btn1");
-//    imgMovi[i] = btn;
-//    console.log(imgMovi[i]);
-//    console.log(btn);
-//    console.log(result);
-//    boxCategorie = box.parentNode;
-//    console.log(boxCategorie);
-//    var target = document.getElementsByClassName("BestmovieBox");
-//    console.log(target[0]);
-//    btn.addEventListener('click',popUpPicture);
-//    }
-//
-//function test(){
-//console.log(target);
-//console.log("jbfdbj");
-//console.log(box.parentNode);
-//console.log(box.parentNode = "BestmovieBox");
-//console.log(box.parentNode):
-//}
-
