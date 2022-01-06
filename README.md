@@ -38,7 +38,6 @@ Version
 Auteur
 JulienC-Dev - github : https://github.com/JulienC-Dev/P6_streamingvideo
 
-Markdown
 
 
 
