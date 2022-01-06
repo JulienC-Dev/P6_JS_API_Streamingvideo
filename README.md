@@ -1,13 +1,15 @@
 # PROJET 6
 
-Création d'un site Web de streaming :
+## Création d'un site Web de streaming :
 
 L'application web permet de visualiser en temps réel via une API différents films classés par catégories.
 
 L'application interagit avec une API Rest.
 
+<ol>
 
-1 - Pré-requis pour se connecter à l'API Rest:
+<li> 1 - Pré-requis pour se connecter à l'API Rest: </li>
+
 - Installer la dernière version de Python sur le site : https://www.python.org
 - Ouvrir l'interpréteur des commandes de Python (terminal sur Mac)
 - Créer un nouveau repertoire via la commande "mkir" exemple : tapez - mkdir projets dans la console
@@ -17,15 +19,18 @@ L'application interagit avec une API Rest.
 
 
 
-1.2 - Connection à l'Api Rest
+<li> 1.2 - Connection à l'Api Rest </li>
+
 - cloner le repository avec l'interpréteur - git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git
 - puis se connecter à la racine via cd ocmovies-api-fr
 - Démarrer le serveur avec python manage.py runserver
 
-1.3 - Lancement du site
+<li> 1.3 - Lancement du site </li>
 
 - Cliquez sur le fichier page.html du dossier pour lancer le site Web en local
 
+
+</ol>
 
 Version
 0.1
